@@ -6,13 +6,13 @@ var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
 
 // Controllers
-var indexRouter = require('./server/routes/index');
+var routes = require('./server/routes/index');
 var users = require('./server/routes/users');
 
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'server/views'));
+app.set('views', path.join(__dirname, 'server/views/pages'));
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
@@ -27,7 +27,7 @@ app.use(sassMiddleware({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/', routes);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
