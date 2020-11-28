@@ -7,7 +7,7 @@ var sassMiddleware = require('node-sass-middleware');
 
 // Controllers
 var indexRouter = require('./server/routes/index');
-var usersRouter = require('./server/routes/users');
+var users = require('./server/routes/users');
 
 var app = express();
 
@@ -28,7 +28,7 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -47,3 +47,9 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+app.set('port', process.env.PORT || 3000);
+var server = app.listen(app.get('port'), function() {
+  console.log('Express server listening on port ' +
+  server.address().port);
+});
